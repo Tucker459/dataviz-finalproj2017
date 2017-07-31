@@ -155,7 +155,7 @@
             "Unknown"
           ];
 
-          d3.csv("globalterrorismdb_US0617dist_type.csv", type, function(error, states) {
+          d3.csv("globalterrorismdb_US0617dist_type.csv", function(error, states) {
             if (error) throw error;
             var stateById = d3.map();
             states.forEach(function(d) { stateById.set(d.id, d); });
