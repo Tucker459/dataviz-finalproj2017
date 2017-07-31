@@ -86,10 +86,6 @@
           var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
           y = d3.scaleLinear().rangeRound([height, 0]);
 
-          var xAxis = d3.svg.axis()
-          .scale(x)
-          .orient("bottom");
-
           var vx = svg.append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -107,12 +103,8 @@
           vx.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
-          .call(xAxis)
-          .selectAll("text")
-          .style("text-anchor", "end")
-          .attr("dx", "-.8em")
-          .attr("dy", "-.55em")
-          .attr("transform", "rotate(-90)" );
+          .attr("transform", "rotate(-90)")
+          .call(d3.axisBottom(x));
 
 
 
