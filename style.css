@@ -1,13 +1,18 @@
-.section{
-  font-size: 6em;
-  text-align: center;
-  background-color: 'orange';
-}
-
 .bar{
   fill: steelblue;
 }
 
 .bar:hover {
   fill: green;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
