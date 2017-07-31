@@ -1,0 +1,13 @@
+.section{
+  font-size: 6em;
+  text-align: center;
+  background-color: 'orange';
+}
+
+.bar{
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: green;
+}
