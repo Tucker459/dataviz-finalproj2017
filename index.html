@@ -156,9 +156,7 @@
     		var simulation = d3.forceSimulation()
     	  		.force("x", d3.forceX(width / 2).strength(0.05))
     	 			.force("y", d3.forceY(height / 2).strength(0.05))
-    	 			.force("Collide", d3.forceCollide(function(d){
-    					return radiusScale(d.Attacktype1)
-    				}));
+    	 			.force("Collide", d3.forceCollide(10));
 
 
     d3.queue()
@@ -171,9 +169,7 @@
             .selectAll(".bubble")
             .data(data)
             .enter().append("circle")
-            .attr("r", function(d){
-    					return radiusScale(d.Attacktype1)
-    				})
+            .attr("r", 10)
             .style("fill", "lightblue");
 
     		var labels = svg.selectAll(".bubbles-label")
@@ -215,7 +211,7 @@
   </section>
 
   <section class="slide">
-    <h2>What kind of attacks and how much?</h2>
+    <h2>What kind of Attacks and How Much?</h2>
     <script src="//d3js.org/d3.v4.min.js"></script>
     <svg id="piebar" height=960 width=500></svg>
 <script>
@@ -244,6 +240,7 @@
     // A drop-down menu for selecting a state; uses the "menu" namespace.
     dispatch.on("load.menu", function(stateById) {
       var select = d3.select("body").select("svg#piebar")
+        .append("div")
         .append("select")
           .on("change", function() { dispatch.call("statechange", this, stateById.get(this.value)); });
 
@@ -352,6 +349,7 @@
       return d;
     }
 </script>
+<p>This is a pie and bar chart that interacts with one another through a parameter that toggles through each state. This allows the user to go into more detail if that is their desire.</p>
   </section>
     <!-- End slides. -->
 
