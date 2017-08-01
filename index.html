@@ -243,7 +243,7 @@
 
     // A drop-down menu for selecting a state; uses the "menu" namespace.
     dispatch.on("load.menu", function(stateById) {
-      var select = d3.select("body").select("svg")
+      var select = d3.select("body").append("svg#piebar")
         .append("div")
         .append("select")
           .on("change", function() { dispatch.call("statechange", this, stateById.get(this.value)); });
@@ -285,11 +285,6 @@
       svg.append("g")
           .attr("class", "y axis")
           .call(yAxis);
-
-          svg.append("g")
-           .attr("class", "labels");
-          svg.append("g")
-            .attr("class", "lines");
 
       var rect = svg.append("rect")
           .attr("x", 4)
@@ -353,7 +348,7 @@
       return d;
     }
 </script>
-<p>This is a pie and bar chart that interacts with one another through a parameter that toggles through each state. This allows the user to go into more detail if that is their desire.</p>
+<p>This is a pie and bar chart that interacts with one another through a parameter that toggles through each state. This allows the user to go into more detail if that is their desire. I was able to utilize Mike Bostock's <a href="https://bl.ocks.org/mbostock/5872848">Dispatching Events</a> as a guide.</p>
   </section>
     <!-- End slides. -->
 
