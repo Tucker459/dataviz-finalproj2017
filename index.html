@@ -32,7 +32,6 @@
   <!-- Required Modernizr file -->
   <script src="modernizr.custom.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
 </head>
 <body>
   <div class="deck-container">
@@ -184,7 +183,7 @@
     		  .attr("class", "bubbles-label")
     		  .attr("text-anchor", "middle")
     		  .attr("fill", "black")
-    		  .attr("font-size", "8px")
+    		  .attr("font-size", "12px")
     		  .text(function(d) {
     		    return d.Provstate;
       })
@@ -351,7 +350,7 @@
       return d;
     }
 </script>
-<p>This is a pie and bar chart that interacts with one another through a parameter that toggles through each state. This allows the user to go into more detail if that is their desire. I was able to utilize Mike Bostock's <a href="https://bl.ocks.org/mbostock/5872848">Dispatching Events</a> as a guide.</p>
+<p>This is a pie and bar chart that interacts with one another through a parameter that toggles through each state. I started with California because it had one of the highest number of attacks. This allows the user to go into more detail if that is their desire. I was able to utilize Mike Bostock's <a href="https://bl.ocks.org/mbostock/5872848">Dispatching Events</a> as a guide.</p>
   </section>
     <!-- End slides. -->
 
