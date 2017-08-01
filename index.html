@@ -156,7 +156,9 @@
     		var simulation = d3.forceSimulation()
     	  		.force("x", d3.forceX(width / 2).strength(0.05))
     	 			.force("y", d3.forceY(height / 2).strength(0.05))
-    	 			.force("Collide", d3.forceCollide(10));
+    	 			.force("Collide", d3.forceCollide(function(d){
+              return scaleSqrt(d.Attacktype1)
+            }));
 
 
     d3.queue()
@@ -169,7 +171,9 @@
             .selectAll(".bubble")
             .data(data)
             .enter().append("circle")
-            .attr("r", 10)
+            .attr("r", function(d){
+              return scaleSqrt(d.Attacktype1)
+            })
             .style("fill", "lightblue");
 
     		var labels = svg.selectAll(".bubbles-label")
