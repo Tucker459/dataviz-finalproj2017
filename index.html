@@ -31,6 +31,8 @@
 
   <!-- Required Modernizr file -->
   <script src="modernizr.custom.js"></script>
+
+  <script src="d3.legend.js"></script>
 </head>
 <body>
   <div class="deck-container">
@@ -285,6 +287,12 @@
       svg.append("g")
           .attr("class", "y axis")
           .call(yAxis);
+
+      var legend = svg.append("g")
+        .attr("class","legend")
+        .attr("transform","translate(50,30)")
+        .style("font-size","12px")
+        .call(d3.legend);
 
       var rect = svg.append("rect")
           .attr("x", 4)
