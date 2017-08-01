@@ -13,6 +13,6 @@
 .axis line,
 .axis path {
   fill: none;
-  stroke: #000;
+  stroke: white;
   shape-rendering: crispEdges;
 }
