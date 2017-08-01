@@ -136,7 +136,80 @@
     </section>
 
     <section class="slide">
-      <p>Hi Slide 3</p>
+    		<script src="//d3js.org/d3.v4.js"></script>
+    		<script>
+    		var width = 500,
+    			height = 500;
+
+    var svg = d3.select("body")
+        .append("svg")
+    		.attr("class", "bubble")
+    		.attr("height", height)
+        .attr("width", width)
+    		.append("g")
+    		.attr("transform", "translate(0,0)");
+
+    		var radiusScale = d3.scaleSqrt().domain([3, 1933]).range([10, 80]);
+
+    		var simulation = d3.forceSimulation()
+    	  		.force("x", d3.forceX(width / 2).strength(0.05))
+    	 			.force("y", d3.forceY(height / 2).strength(0.05))
+    	 			.force("Collide", d3.forceCollide(function(d){
+    					return radiusScale(d.Attacktype1)
+    				}));
+
+
+    d3.queue()
+    	.defer(d3.csv,"US_Totals_TA.csv")
+    	.await(ready);
+
+       function ready (error, data){
+        var bubbles = svg.append("g")
+            .attr("transform", "translate(0,0)")
+            .selectAll(".bubble")
+            .data(data)
+            .enter().append("circle")
+            .attr("r", function(d){
+    					return radiusScale(d.Attacktype1)
+    				})
+            .style("fill", "lightblue");
+
+    		var labels = svg.selectAll(".bubbles-label")
+    		  .data(data)
+    		  .enter().append("text")
+    		  .attr("class", "bubbles-label")
+    		  .attr("text-anchor", "middle")
+    		  .attr("fill", "black")
+    		  .attr("font-size", "8px")
+    		  .text(function(d) {
+    		    return d.Provstate;
+      })
+
+    		simulation.nodes(data)
+    			.on('tick', ticked);
+
+    		function ticked(){
+    			bubbles
+    				.attr("cx", function(d) {
+    					return d.x
+    				})
+    				.attr("cy", function(d){
+    					return d.y
+    				});
+    		labels
+    			  .attr("x", function(d) {
+    			    return d.x;
+    			  })
+    			  .attr("y", function(d) {
+    			    return d.y;
+    	  })
+
+    		}
+
+
+    };
+
+    	</script>
   </section>
     <!-- End slides. -->
 
