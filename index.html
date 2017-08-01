@@ -217,7 +217,9 @@
   <section class="slide">
     <h2>What kind of Attacks and How Much?</h2>
     <script src="//d3js.org/d3.v4.min.js"></script>
-    <svg id="piebar" height=960 width=500></svg>
+    <div id="piebar_div" style="margin:1em;">
+      <svg id="piebar" height=960 width=500></svg>
+    </div>
 <script>
     var dispatch = d3.dispatch("load", "statechange");
 
@@ -243,8 +245,7 @@
 
     // A drop-down menu for selecting a state; uses the "menu" namespace.
     dispatch.on("load.menu", function(stateById) {
-      var select = d3.select("body").select("svg")
-        .append("div")
+      var select = d3.select("#piebar_div")
         .append("select")
           .on("change", function() { dispatch.call("statechange", this, stateById.get(this.value)); });
 
