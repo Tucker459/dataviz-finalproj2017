@@ -243,7 +243,7 @@
 
     // A drop-down menu for selecting a state; uses the "menu" namespace.
     dispatch.on("load.menu", function(stateById) {
-      var select = d3.select("body").select("svg#piebar")
+      var select = d3.select("body").select("svg")
         .append("div")
         .append("select")
           .on("change", function() { dispatch.call("statechange", this, stateById.get(this.value)); });
