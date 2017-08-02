@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -33,6 +34,7 @@
   <script src="modernizr.custom.js"></script>
 
 </head>
+
 <body>
   <div class="deck-container">
 
@@ -40,96 +42,111 @@
 
     <section class="slide">
       <h2>United States Terrorist Attacks from 1970 - 2016</h2>
-        <p>
-          What kinds of attacks have the United States experienced from the last 45 years? Which state is the most prone to be targeted? New York, Montana, Miami! Who knows?
-				  As the United States has grown to become the one of the most dominant superpowers in the world and as the leadership has changed numerous times we have experienced terrible times in America from the attacks on our nation.
-				  With the help of <a href="http://www.start.umd.edu/">National Consortium for the Study of Terrorism and Responses to Terrorism (START)</a> and <a href="https://www.kaggle.com/START-UMD/gtd">Kaggle</a> where I recieved the data from.
-					I was able to help visualize some of data to these questions.
-        </p>
+      <p>
+        What kinds of attacks have the United States experienced from the last 45 years? Which state is the most prone to be targeted? New York, Montana, Miami! Who knows? As the United States has grown to become the one of the most dominant superpowers in the
+        world and as the leadership has changed numerous times we have experienced terrible times in America from the attacks on our nation. With the help of <a href="http://www.start.umd.edu/">National Consortium for the Study of Terrorism and Responses to Terrorism (START)</a>        and <a href="https://www.kaggle.com/START-UMD/gtd">Kaggle</a> where I recieved the data from. I was able to help visualize some of data to these questions.
+      </p>
+
+      <h3>Please use with the Chrome Browser. Hasn't been tested with other web browsers.</h3>
     </section>
 
     <section class="slide">
       <h2>Hybrid Structure</h2>
-        <p>
-          This presentation utilizes the interactive slideshow hybrid structure which allows the user to follow a story that I have created and dive into details at their leisure.
-        </p>
+      <p>
+        This presentation utilizes the interactive slideshow hybrid structure which allows the user to follow a story that I have created and dive into details at their leisure.
+      </p>
       <h2>Scenes</h2>
-        <p>
-          This is based off of the <a href="http://imakewebthings.com/deck.js/">deck.js</a> package which allows you create html presentation slideshows. With the numerous available add-ons and features presented by this package I was able to customize my slideshow accordly to capture the user's attention.
-        </p>
+      <p>
+        This is based off of the <a href="http://imakewebthings.com/deck.js/">deck.js</a> package which allows you create html presentation slideshows. With the numerous available add-ons and features presented by this package I was able to customize
+        my slideshow accordly to capture the user's attention.
+      </p>
       <h2>Annotations</h2>
-        <p>
-          As you mouse over the bars of the bar chart the color of the bar changes to indicate that you are currently over that bar.
-        </p>
+      <p>
+        As you mouse over the bars of the bar chart the color of the bar changes to indicate that you are currently over that bar.
+      </p>
       <h2>Parameters</h2>
-        <p>
-          I utilized triggers with my pie chart and bar chart visulaization where you are able to select the state and this displays the count of attacks and percentage of groups.
-        </p>
+      <p>
+        I utilized triggers with my pie chart and bar chart visulaization where you are able to select the state and this displays the count of attacks and percentage of groups.
+      </p>
       <h2>Triggers</h2>
-        <p>
-          I utilized linear ordering by allowing the use of the spacebar, arrow keys, or the arrow buttons presented on the screen to move through the visualization.
-        </p>
+      <p>
+        I utilized linear ordering by allowing the use of the spacebar, arrow keys, or the arrow buttons presented on the screen to move through the visualization.
+      </p>
     </section>
 
     <section class="slide">
       <h2>US Terrorism Attacks Types</h2>
       <script src="//d3js.org/d3.v4.js"></script>
-          <svg id="bar" width="960" height="500"></svg>
-          <script>
-
-          // Setting the margins
-          var svg = d3.select("svg#bar"),
-          margin = {top: 20, right: 20, bottom: 30, left: 40},
+      <svg id="bar" width="960" height="500"></svg>
+      <script>
+        // Setting the margins
+        var svg = d3.select("svg#bar"),
+          margin = {
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 40
+          },
           width = +svg.attr("width") - margin.left - margin.right,
           height = +svg.attr("height") - margin.top - margin.bottom;
 
-          // Creating Linear and Band Scales
-          var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+        // Creating Linear and Band Scales
+        var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
           y = d3.scaleLinear().rangeRound([height, 0]);
 
-          var vx = svg.append("g")
+        var vx = svg.append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-          // Grabbing Data
-          d3.csv("globalterrorismdb_US0617dist.csv", function(d) {
+        // Grabbing Data
+        d3.csv("globalterrorismdb_US0617dist.csv", function(d) {
           d.attacktype1 = +d.attacktype1;
           return d;
-          }, function(error, data) {
+        }, function(error, data) {
           if (error) throw error;
 
-          x.domain(data.map(function(d) { return d.attacktype1_txt; }));
-          y.domain([0, d3.max(data, function(d) { return d.attacktype1; })]);
+          x.domain(data.map(function(d) {
+            return d.attacktype1_txt;
+          }));
+          y.domain([0, d3.max(data, function(d) {
+            return d.attacktype1;
+          })]);
 
           // Creation of the X Axis
           vx.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + height + ")", "rotate(-90)")
-          .call(d3.axisBottom(x));
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")", "rotate(-90)")
+            .call(d3.axisBottom(x));
 
 
 
           // Creation of the Y Axis
           vx.append("g")
-          .attr("class", "y axis")
-          .call(d3.axisLeft(y).ticks(10, ""))
-          .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", "0.71em")
-          .attr("text-anchor", "left")
-          .text("Count");
+            .attr("class", "y axis")
+            .call(d3.axisLeft(y).ticks(10, ""))
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "left")
+            .text("Count");
 
           // Creation of the width and height of the bars
           vx.selectAll(".bar")
-          .data(data)
-          .enter().append("rect")
-          .attr("class", "bar")
-          .attr("x", function(d) { return x(d.attacktype1_txt); })
-          .attr("y", function(d) { return y(d.attacktype1); })
-          .attr("width", x.bandwidth())
-          .attr("height", function(d) { return height - y(d.attacktype1); })
-          });
-          </script>
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function(d) {
+              return x(d.attacktype1_txt);
+            })
+            .attr("y", function(d) {
+              return y(d.attacktype1);
+            })
+            .attr("width", x.bandwidth())
+            .attr("height", function(d) {
+              return height - y(d.attacktype1);
+            })
+        });
+      </script>
 
       <p>
         This is a bar chart describing the amount of different attack types that happen in the United States. I was able to accomplish this by utilizing Mike Bostock's <a href="https://bl.ocks.org/mbostock/3885304">Bar Chart</a> example to follow.
@@ -137,222 +154,248 @@
     </section>
 
     <section class="slide">
-    		<script src="//d3js.org/d3.v4.js"></script>
-        <svg id="bubble" width=500 height=500></svg>
-        <h2>Which state was targeted the most?</h2>
-    		<script>
-    		var width = 500,
-    			height = 500;
+      <script src="//d3js.org/d3.v4.js"></script>
+      <svg id="bubble" width=500 height=500></svg>
+      <h2>Which state was targeted the most?</h2>
+      <script>
+        var width = 500,
+          height = 500;
 
-    var svg = d3.select("body")
-        .select("svg#bubble")
-    		.attr("class", "bubble")
-    		.attr("height", height)
-        .attr("width", width)
-    		.append("g")
-    		.attr("transform", "translate(0,0)");
+        var svg = d3.select("body")
+          .select("svg#bubble")
+          .attr("class", "bubble")
+          .attr("height", height)
+          .attr("width", width)
+          .append("g")
+          .attr("transform", "translate(0,0)");
 
-    		var radiusScale = d3.scaleSqrt().domain([3, 1933]).range([10, 80]);
+        var radiusScale = d3.scaleSqrt().domain([3, 1933]).range([10, 80]);
 
-    		var simulation = d3.forceSimulation()
-    	  		.force("x", d3.forceX(width / 2).strength(0.05))
-    	 			.force("y", d3.forceY(height / 2).strength(0.05))
-    	 			.force("Collide", d3.forceCollide(function(d){
-              return radiusScale(d.Attacktype1) + 1;
-            }));
+        var simulation = d3.forceSimulation()
+          .force("x", d3.forceX(width / 2).strength(0.05))
+          .force("y", d3.forceY(height / 2).strength(0.05))
+          .force("Collide", d3.forceCollide(function(d) {
+            return radiusScale(d.Attacktype1) + 1;
+          }));
 
 
-    d3.queue()
-    	.defer(d3.csv,"US_Totals_TA.csv")
-    	.await(ready);
+        d3.queue()
+          .defer(d3.csv, "US_Totals_TA.csv")
+          .await(ready);
 
-       function ready (error, data){
-        var bubbles = svg.append("g")
+        function ready(error, data) {
+          var bubbles = svg.append("g")
             .attr("transform", "translate(0,0)")
             .selectAll(".bubble")
             .data(data)
             .enter().append("circle")
-            .attr("r", function(d){
+            .attr("r", function(d) {
               return radiusScale(d.Attacktype1);
             })
             .style("fill", "lightblue");
 
-    		var labels = svg.selectAll(".bubbles-label")
-    		  .data(data)
-    		  .enter().append("text")
-    		  .attr("class", "bubbles-label")
-    		  .attr("text-anchor", "middle")
-    		  .attr("fill", "black")
-    		  .attr("font-size", "12px")
-    		  .text(function(d) {
-    		    return d.Provstate;
-      })
+          var labels = svg.selectAll(".bubbles-label")
+            .data(data)
+            .enter().append("text")
+            .attr("class", "bubbles-label")
+            .attr("text-anchor", "middle")
+            .attr("fill", "black")
+            .attr("font-size", "12px")
+            .text(function(d) {
+              return d.Provstate;
+            })
 
-    		simulation.nodes(data)
-    			.on('tick', ticked);
+          simulation.nodes(data)
+            .on('tick', ticked);
 
-    		function ticked(){
-    			bubbles
-    				.attr("cx", function(d) {
-    					return d.x
-    				})
-    				.attr("cy", function(d){
-    					return d.y
-    				});
-    		labels
-    			  .attr("x", function(d) {
-    			    return d.x;
-    			  })
-    			  .attr("y", function(d) {
-    			    return d.y;
-    	  })
+          function ticked() {
+            bubbles
+              .attr("cx", function(d) {
+                return d.x
+              })
+              .attr("cy", function(d) {
+                return d.y
+              });
+            labels
+              .attr("x", function(d) {
+                return d.x;
+              })
+              .attr("y", function(d) {
+                return d.y;
+              })
 
-    		}
+          }
 
 
-    };
-    	</script>
+        };
+      </script>
       <h3>Refresh the page!</h3>
-      <p> This is a bubble chart showing the states in America that have been attacked as an act of terrorism. The size of the bubble indicates which states have been attacked the most during this period of time. I was able to create this by interactive bubble chart by following along with Jonathan Soma's <a href="https://www.youtube.com/watch?v=lPr60pexvEM">video</a> this really helped me out a lot.</p>
-  </section>
+      <p> This is a bubble chart showing the states in America that have been attacked as an act of terrorism. The size of the bubble indicates which states have been attacked the most during this period of time. I was able to create this by interactive bubble
+        chart by following along with Jonathan Soma's <a href="https://www.youtube.com/watch?v=lPr60pexvEM">video</a> this really helped me out a lot.</p>
+    </section>
 
-  <section class="slide">
-    <h2>What kind of Attacks and How Much?</h2>
-    <script src="//d3js.org/d3.v4.min.js"></script>
-    <div id="piebar_div" style="margin:1em;">
-      <svg id="piebar" height=960 width=500></svg>
-    </div>
-<script>
-    var dispatch = d3.dispatch("load", "statechange");
+    <section class="slide">
+      <h2>What kind of Attacks and How Much?</h2>
+      <script src="//d3js.org/d3.v4.min.js"></script>
+      <div id="piebar_div" style="margin:1em;">
+        <svg id="piebar" height=960 width=500></svg>
+      </div>
+      <script>
+        var dispatch = d3.dispatch("load", "statechange");
 
-    var groups = [
-      "Armed Assault",
-      "Assassination",
-      "Bombing/Explosion",
-      "Facility/Infrastructure Attack",
-      "Hijacking",
-      "Hostage Taking(Barricade Incident)",
-      "Hostage Taking(Kidnapping)",
-      "Unarmed Assault",
-      "Unknown"
-    ];
+        var groups = [
+          "Armed Assault",
+          "Assassination",
+          "Bombing/Explosion",
+          "Facility/Infrastructure Attack",
+          "Hijacking",
+          "Hostage Taking(Barricade Incident)",
+          "Hostage Taking(Kidnapping)",
+          "Unarmed Assault",
+          "Unknown"
+        ];
 
-    d3.csv("globalterrorismdb_US0617dist_type.csv", type, function(error, states) {
-      if (error) throw error;
-      var stateById = d3.map();
-      states.forEach(function(d) { stateById.set(d.id, d); });
-      dispatch.call("load", this, stateById);
-      dispatch.call("statechange", this, stateById.get("California"));
-    });
+        d3.csv("globalterrorismdb_US0617dist_type.csv", type, function(error, states) {
+          if (error) throw error;
+          var stateById = d3.map();
+          states.forEach(function(d) {
+            stateById.set(d.id, d);
+          });
+          dispatch.call("load", this, stateById);
+          dispatch.call("statechange", this, stateById.get("California"));
+        });
 
-    // A drop-down menu for selecting a state; uses the "menu" namespace.
-    dispatch.on("load.menu", function(stateById) {
-      var select = d3.select("#piebar_div")
-        .append("select")
-          .on("change", function() { dispatch.call("statechange", this, stateById.get(this.value)); });
-
-      select.selectAll("option")
-          .data(stateById.values())
-        .enter().append("option")
-          .attr("value", function(d) { return d.id; })
-          .text(function(d) { return d.id; });
-
-      dispatch.on("statechange.menu", function(state) {
-        select.property("value", state.id);
-      });
-    });
-
-
-
-
-    // A bar chart to show total population
-    dispatch.on("load.bar", function(stateById) {
-      var margin = {top: 20, right: 20, bottom: 30, left: 40},
-          width = 80 - margin.left - margin.right,
-          height = 460 - margin.top - margin.bottom;
-
-      var y = d3.scaleLinear()
-          .domain([0, d3.max(stateById.values(), function(d) { return d.total; })])
-          .rangeRound([height, 0])
-          .nice();
-
-      var yAxis = d3.axisLeft(y)
-          .tickFormat(d3.format(".2s"));
-
-      var svg = d3.select("body").select("svg#piebar")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-      svg.append("g")
-          .attr("class", "y axis")
-          .call(yAxis);
-
-      var rect = svg.append("rect")
-          .attr("x", 4)
-          .attr("width", width - 4)
-          .attr("y", height)
-          .attr("height", 0)
-          .style("fill", "#aaa");
-
-      dispatch.on("statechange.bar", function(d) {
-        rect.transition()
-            .attr("y", y(d.total))
-            .attr("height", y(0) - y(d.total));
-      });
-    });
-
-    // A pie chart to show population by age group
-    dispatch.on("load.pie", function(stateById) {
-      var width = 880,
-          height = 460,
-          radius = Math.min(width, height) / 2;
-
-      var color = d3.scaleOrdinal()
-          .domain(groups)
-          .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","green","yellow"]);
-
-      var labels = color.domain();
-
-      var arc = d3.arc()
-          .outerRadius(radius - 10)
-          .innerRadius(radius - 70);
-
-      var pie = d3.pie()
-          .sort(null);
-
-      var svg = d3.select("body").select("svg#piebar")
-          .attr("width", width)
-          .attr("height", height)
-        .append("g")
-          .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-      var path = svg.selectAll("path")
-          .data(groups)
-        .enter().append("path")
-          .style("fill", color)
-          .each(function() { this._current = {startAngle: 0, endAngle: 0}; });
-
-      dispatch.on("statechange.pie", function(d) {
-        path.data(pie.value(function(g) { return d[g]; })(groups)).transition()
-            .attrTween("d", function(d) {
-              var interpolate = d3.interpolate(this._current, d);
-              this._current = interpolate(0);
-              return function(t) {
-                return arc(interpolate(t));
-              };
+        // A drop-down menu for selecting a state; uses the "menu" namespace.
+        dispatch.on("load.menu", function(stateById) {
+          var select = d3.select("#piebar_div")
+            .append("select")
+            .on("change", function() {
+              dispatch.call("statechange", this, stateById.get(this.value));
             });
+
+          select.selectAll("option")
+            .data(stateById.values())
+            .enter().append("option")
+            .attr("value", function(d) {
+              return d.id;
+            })
+            .text(function(d) {
+              return d.id;
+            });
+
+          dispatch.on("statechange.menu", function(state) {
+            select.property("value", state.id);
           });
         });
-    // Coerce population counts to numbers and compute total per state.
-    function type(d) {
-      d.total = d3.sum(groups, function(k) { return d[k] = +d[k]; });
-      return d;
-    }
-</script>
-<p>This is a pie and bar chart that interacts with one another through a parameter that toggles through each state. I started with California because it had one of the highest number of attacks. This allows the user to go into more detail if that is their desire. I was able to utilize Mike Bostock's <a href="https://bl.ocks.org/mbostock/5872848">Dispatching Events</a> as a guide.</p>
-  </section>
+
+
+
+
+        // A bar chart to show total population
+        dispatch.on("load.bar", function(stateById) {
+          var margin = {
+              top: 20,
+              right: 20,
+              bottom: 30,
+              left: 40
+            },
+            width = 80 - margin.left - margin.right,
+            height = 460 - margin.top - margin.bottom;
+
+          var y = d3.scaleLinear()
+            .domain([0, d3.max(stateById.values(), function(d) {
+              return d.total;
+            })])
+            .rangeRound([height, 0])
+            .nice();
+
+          var yAxis = d3.axisLeft(y)
+            .tickFormat(d3.format(".2s"));
+
+          var svg = d3.select("body").select("svg#piebar")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+          svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+          var rect = svg.append("rect")
+            .attr("x", 4)
+            .attr("width", width - 4)
+            .attr("y", height)
+            .attr("height", 0)
+            .style("fill", "#aaa");
+
+          dispatch.on("statechange.bar", function(d) {
+            rect.transition()
+              .attr("y", y(d.total))
+              .attr("height", y(0) - y(d.total));
+          });
+        });
+
+        // A pie chart to show population by age group
+        dispatch.on("load.pie", function(stateById) {
+          var width = 880,
+            height = 460,
+            radius = Math.min(width, height) / 2;
+
+          var color = d3.scaleOrdinal()
+            .domain(groups)
+            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "green", "yellow"]);
+
+          var labels = color.domain();
+
+          var arc = d3.arc()
+            .outerRadius(radius - 10)
+            .innerRadius(radius - 70);
+
+          var pie = d3.pie()
+            .sort(null);
+
+          var svg = d3.select("body").select("svg#piebar")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+          var path = svg.selectAll("path")
+            .data(groups)
+            .enter().append("path")
+            .style("fill", color)
+            .each(function() {
+              this._current = {
+                startAngle: 0,
+                endAngle: 0
+              };
+            });
+
+          dispatch.on("statechange.pie", function(d) {
+            path.data(pie.value(function(g) {
+                return d[g];
+              })(groups)).transition()
+              .attrTween("d", function(d) {
+                var interpolate = d3.interpolate(this._current, d);
+                this._current = interpolate(0);
+                return function(t) {
+                  return arc(interpolate(t));
+                };
+              });
+          });
+        });
+        // Coerce population counts to numbers and compute total per state.
+        function type(d) {
+          d.total = d3.sum(groups, function(k) {
+            return d[k] = +d[k];
+          });
+          return d;
+        }
+      </script>
+      <p>This is a pie and bar chart that interacts with one another through a parameter that toggles through each state. I started with California because it had one of the highest number of attacks. This allows the user to go into more detail if that is
+        their desire. I was able to utilize Mike Bostock's <a href="https://bl.ocks.org/mbostock/5872848">Dispatching Events</a> as a guide.</p>
+    </section>
     <!-- End slides. -->
 
     <!-- Begin extension snippets. Add or remove as needed. -->
@@ -365,8 +408,7 @@
 
     <!-- deck.status snippet -->
     <p class="deck-status" aria-role="status">
-      <span class="deck-status-current"></span>
-      /
+      <span class="deck-status-current"></span> /
       <span class="deck-status-total"></span>
     </p>
 
@@ -381,22 +423,23 @@
     <!-- End extension snippets. -->
   </div>
 
-<!-- Required JS files. -->
-<script src="jquery.min.js"></script>
-<script src="core/deck.core.js"></script>
+  <!-- Required JS files. -->
+  <script src="jquery.min.js"></script>
+  <script src="core/deck.core.js"></script>
 
-<!-- Extension JS files. Add or remove as needed. -->
-<script src="extensions/menu/deck.menu.js"></script>
-<script src="extensions/goto/deck.goto.js"></script>
-<script src="extensions/status/deck.status.js"></script>
-<script src="extensions/navigation/deck.navigation.js"></script>
-<script src="extensions/scale/deck.scale.js"></script>
+  <!-- Extension JS files. Add or remove as needed. -->
+  <script src="extensions/menu/deck.menu.js"></script>
+  <script src="extensions/goto/deck.goto.js"></script>
+  <script src="extensions/status/deck.status.js"></script>
+  <script src="extensions/navigation/deck.navigation.js"></script>
+  <script src="extensions/scale/deck.scale.js"></script>
 
-<!-- Initialize the deck. You can put this in an external file if desired. -->
-<script>
-  $(function() {
-    $.deck('.slide');
-  });
-</script>
+  <!-- Initialize the deck. You can put this in an external file if desired. -->
+  <script>
+    $(function() {
+      $.deck('.slide');
+    });
+  </script>
 </body>
+
 </html>
