@@ -1,4 +1,4 @@
-##United States Terrorist Attacks from 1970 - 2016
+## United States Terrorist Attacks from 1970 - 2016
 
 This is a final project for my Data Visualization Course (CS-498) at University of Illinois Urbana-Champaign (UofI) [MCDS](http://cs.illinois.edu/academics/graduate/professional-mcs-program/mcs-data-science-track) program during the Summer 2017 semester. The goal of the project was to utilize D3.js, [Vega](https://vega.github.io/), or [Vega-Lite](https://vega.github.io/vega-lite/) to create our narrative visualizations around one of three hybrid structures: a martina glass , interactive slide-show, or drill down story.
 
