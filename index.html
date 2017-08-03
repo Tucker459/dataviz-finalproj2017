@@ -112,6 +112,8 @@
           })]);
           
           var xAxis = d3.axisBottom().scale(x).ticks(9);
+          
+          var yAxis = d3.axisLeft().scale(y).ticks(9).ticksSizeInner( - width).ticksSizeOuter(0).ticksPadding(10);
 
         
             // Creation of the X Axis
@@ -131,11 +133,11 @@
           // Creation of the Y Axis
           vx.append("g")
             .attr("class", "y axis")
-            .call(d3.axisLeft(y).ticks(10, ".1s"))
+            .call(yAxis)
             .append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", "0.71em")
+            .attr("y", 5)
+            .attr("dy", "0.8em")
             .attr("text-anchor", "left")
             .text("Count");
 
