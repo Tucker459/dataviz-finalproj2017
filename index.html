@@ -160,8 +160,8 @@
       <svg id="bubble" width=1000 height=500></svg>
       <h2>Which state was targeted the most?</h2>
       <script>
-      var width = 1000,
-          height = 500 ;
+        var width = 1000,
+          height = 500;
 
         var svg = d3.select("body")
           .select("svg#bubble")
@@ -180,8 +180,6 @@
             return radiusScale(d.Attacktype1) + 1;
           }));
 
-        var color = d3.scaleOrdinal(d3.schemeCategory20)
-          .range(["#e91e56", "#00965f", "#00bcd4", "#3f51b5", "#9c27b0", "#ff5722", "#cddc39", "#607d8b", "#8bc34a"]);
 
         d3.queue()
           .defer(d3.csv, "US_Totals_TA.csv")
@@ -196,7 +194,7 @@
             .attr("r", function(d) {
               return radiusScale(d.Attacktype1);
             })
-            .style("fill", d => color(d.data.Provstate));
+            .style("fill", "lightblue");
 
           var labels = svg.selectAll(".bubbles-label")
             .data(data)
