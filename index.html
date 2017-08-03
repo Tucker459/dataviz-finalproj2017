@@ -112,12 +112,20 @@
           y.domain([0, d3.max(data, function(d) {
             return d.attacktype1;
           })]);
+          
+          var xAxis = d3.axisBottom().scale(x).ticks(9);
 
           // Creation of the X Axis
           vx.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")", "rotate(-45)")
-            .call(d3.axisBottom(x));
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis)
+            .selectAll("text")
+            .style("text-anchor". "end")
+            .attr("dx", "0.5em")
+            .attr("dy", "-.55em")
+            .attr("y", 30)
+            .attr("transform", "rotate(-45)");
 
 
 
@@ -148,142 +156,10 @@
               return height - y(d.attacktype1);
             })
         });
-
-        const labels = [{
-            data: {
-              attacktype1_txt: "Armed Assault",
-              attacktype1: 350
-            },
-            dy: 37,
-            dx: -142
-          },
-          {
-            data: {
-              attacktype1_txt: "Assassination",
-              attacktype1: 125
-            },
-            dy: -137,
-            dx: 0,
-            note: {
-              align: "middle"
-            }
-          },
-          {
-            data: {
-              attacktype1_txt: "Bombing/Explosion",
-              attacktype1: 3813
-            },
-            dy: -137,
-            dx: 0,
-            note: {
-              align: "middle"
-            }
-          },
-          {
-            data: {
-              attacktype1_txt: "Facility/Infrastructure Attack",
-              attacktype1: 4074
-            },
-            dy: -137,
-            dx: 0,
-            note: {
-              align: "middle"
-            }
-          },
-          {
-            data: {
-              attacktype1_txt: "Hijacking",
-              attacktype1: 44
-            },
-            dy: -137,
-            dx: 0,
-            note: {
-              align: "middle"
-            }
-          },
-          {
-            data: {
-              attacktype1_txt: "Hostage Taking (Barricade Incident)",
-              attacktype1: 280
-            },
-            dy: -137,
-            dx: 0,
-            note: {
-              align: "middle"
-            }
-          },
-          {
-            data: {
-              attacktype1_txt: "Hostage Taking (Kidnapping)",
-              attacktype1: 108
-            },
-            dy: -137,
-            dx: 0,
-            note: {
-              align: "middle"
-            }
-          },
-          {
-            data: {
-              attacktype1_txt: "Unarmed Assault",
-              attacktype1: 120
-            },
-            dy: -137,
-            dx: 0,
-            note: {
-              align: "middle"
-            }
-          },
-          {
-            data: {
-              attacktype1_txt: "Unknown",
-              attacktype1: 99
-            },
-            dy: -137,
-            dx: 0,
-            note: {
-              align: "middle"
-            }
-          }
-        ].map(l => {
-          l.note = Object.assign({}, l.note, {
-            title: `Close: ${l.data.attacktype1_txt}`,
-            label: `${l.data.attacktype1}`
-          })
-          l.subject = {
-            radius: 4
-          }
-
-          return l
-        })
-
-        const makeAnnotations = d3.annotation()
-        .annotations(labels)
-        .type(d3.annotationCalloutCircle)
-        .accessors({ x: d => x(d.attacktype1_txt),
-          y: d => y(d.attacktype1)
-        })
-        .accessorsInverse({
-          date: d => x.invert(d.x),
-          close: d => y.invert(d.y)
-        })
-        .on('subjectover', function(annotation) {
-          annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
-            .classed("hidden", false)
-        })
-        .on('subjectout', function(annotation) {
-          annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
-            .classed("hidden", true)
-        });
-
-      svg.append("g")
-        .attr("class", "annotation-test")
-        .call(makeAnnotations);
-
-      svg.selectAll("g.annotation-connector, g.annotation-note")
-        .classed("hidden", true);
       </script>
 
+      
+      
       <p>
         This is a bar chart describing the amount of different attack types that happen in the United States. I was able to accomplish this by utilizing Mike Bostock's <a href="https://bl.ocks.org/mbostock/3885304">Bar Chart</a> example to follow.
       </p>
