@@ -14,7 +14,11 @@
 .axis path {
   fill: none;
   stroke: #000;
-  shape-rendering: auto;
+  shape-rendering: crispEdges;
+}
+
+.tooltip {
+  color: black;
 }
 
 .legend rect {
