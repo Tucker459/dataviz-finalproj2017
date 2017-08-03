@@ -87,8 +87,8 @@
             bottom: 100,
             left: 60
           },
-          width = +svg.attr("width") - margin.left - margin.right,
-          height = +svg.attr("height") - margin.top - margin.bottom;
+          width = +svg.attr("width") + margin.left + margin.right,
+          height = +svg.attr("height") + margin.top + margin.bottom;
 
         // Creating Linear and Band Scales
         var x = d3.scaleBand().rangeRound([15, width]).padding(0.5),
