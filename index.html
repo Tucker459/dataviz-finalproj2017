@@ -113,17 +113,7 @@
           
           var xAxis = d3.axisBottom().scale(x).ticks(9);
 
-          // Creation of the X Axis
-          vx.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis)
-            .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "0.5em")
-            .attr("dy", "-.55em")
-            .attr("y", 20)
-            .attr("transform", "rotate(-45)");
+        
 
 
 
