@@ -8,6 +8,8 @@
 
   <title>CS498-DataVizFinalProject</title>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.18.0/d3-annotation.min.js"></script>
+
   <!-- Required stylesheet -->
   <link rel="stylesheet" media="screen" href="core/deck.core.css">
 
@@ -158,22 +160,20 @@
       <svg id="bubble" width=1000 height=500></svg>
       <h2>Which state was targeted the most?</h2>
       <script>
-        var width = 1000,
-          height = 500;
 
         var svg = d3.select("body")
           .select("svg#bubble")
           .attr("class", "bubble")
-          .attr("height", height)
-          .attr("width", width)
+          .attr("height", +svg.attr("height"))
+          .attr("width", +svg.attr("width"))
           .append("g")
           .attr("transform", "translate(0,0)");
 
         var radiusScale = d3.scaleSqrt().domain([3, 1933]).range([10, 80]);
 
         var simulation = d3.forceSimulation()
-          .force("x", d3.forceX(width / 2).strength(0.05))
-          .force("y", d3.forceY(height / 2).strength(0.05))
+          .force("x", d3.forceX(+svg.attr("width") / 2).strength(0.05))
+          .force("y", d3.forceY(+svg.attr("height") / 2).strength(0.05))
           .force("Collide", d3.forceCollide(function(d) {
             return radiusScale(d.Attacktype1) + 1;
           }));
