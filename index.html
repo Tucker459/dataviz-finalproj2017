@@ -45,8 +45,8 @@
     <section class="slide">
       <h2>United States Terrorist Attacks from 1970 - 2016</h2>
       <p>
-        What kinds of attacks have the United States experienced from the last 45 years? Which state is the most prone to be targeted? New York, Montana, Florida! Who knows? As the United States has grown to become the one of the most dominant superpowers in the
-        world and as the leadership has changed numerous times we have experienced terrible times in America from the attacks on our nation. With the help of <a href="http://www.start.umd.edu/">National Consortium for the Study of Terrorism and Responses to Terrorism (START)</a>        and <a href="https://www.kaggle.com/START-UMD/gtd">Kaggle</a> where I recieved the data from. I was able to help visualize some of data to these questions.
+        What kinds of attacks have the United States experienced from the last 45 years? Which state is the most prone to be targeted? New York, Montana, Florida! Who knows? As the United States has grown to become the one of the most dominant superpowers in
+        the world and as the leadership has changed numerous times we have experienced terrible times in America from the attacks on our nation. With the help of <a href="http://www.start.umd.edu/">National Consortium for the Study of Terrorism and Responses to Terrorism (START)</a>        and <a href="https://www.kaggle.com/START-UMD/gtd">Kaggle</a> where I recieved the data from. I was able to help visualize some of data to these questions.
       </p>
 
       <h5>Please use with the Chrome Browser. Hasn't been tested with other web browsers.</h5>
@@ -148,6 +148,141 @@
               return height - y(d.attacktype1);
             })
         });
+
+        const labels = [{
+            data: {
+              attacktype1_txt: "armed_assault",
+              attacktype1: 350
+            },
+            dy: 37,
+            dx: -142
+          },
+          {
+            data: {
+              attacktype1_txt: "assassination",
+              attacktype1: 125
+            },
+            dy: -137,
+            dx: 0,
+            note: {
+              align: "middle"
+            }
+          },
+          {
+            data: {
+              attacktype1_txt: "bombing/explosion",
+              attacktype1: 3,813
+            },
+            dy: -137,
+            dx: 0,
+            note: {
+              align: "middle"
+            }
+          },
+          {
+            data: {
+              attacktype1_txt: "facility/infrastructure_attack",
+              attacktype1: 4,074
+            },
+            dy: -137,
+            dx: 0,
+            note: {
+              align: "middle"
+            }
+          },
+          {
+            data: {
+              attacktype1_txt: "hijacking",
+              attacktype1: 44
+            },
+            dy: -137,
+            dx: 0,
+            note: {
+              align: "middle"
+            }
+          },
+          {
+            data: {
+              attacktype1_txt: "hostage(barricade incident)",
+              attacktype1: 280
+            },
+            dy: -137,
+            dx: 0,
+            note: {
+              align: "middle"
+            }
+          },
+          {
+            data: {
+              attacktype1_txt: "hostage(kidnapping)",
+              attacktype1: 108
+            },
+            dy: -137,
+            dx: 0,
+            note: {
+              align: "middle"
+            }
+          },
+          {
+            data: {
+              attacktype1_txt: "unarmed_assault",
+              attacktype1: 120
+            },
+            dy: -137,
+            dx: 0,
+            note: {
+              align: "middle"
+            }
+          },
+          {
+            data: {
+              attacktype1_txt: "unknown",
+              attacktype1: 99
+            },
+            dy: -137,
+            dx: 0,
+            note: {
+              align: "middle"
+            }
+          }
+        ].map(l => {
+          l.note = Object.assign({}, l.note, {
+            title: `Close: ${l.data.attacktype1_txt}`,
+            label: `${l.data.attacktype1}`
+          })
+          l.subject = {
+            radius: 4
+          }
+
+          return l
+        })
+
+        window.makeAnnotations = d3.annotation()
+        .annotations(labels)
+        .type(d3.annotationCalloutCircle)
+        .accessors({ x: d => x(d.attacktype1_txt)),
+          y: d => y(d.attacktype1)
+        })
+        .accessorsInverse({
+          date: d => x.invert(d.x),
+          close: d => y.invert(d.y)
+        })
+        .on('subjectover', function(annotation) {
+          annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
+            .classed("hidden", false)
+        })
+        .on('subjectout', function(annotation) {
+          annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
+            .classed("hidden", true)
+        });
+
+      svg.append("g")
+        .attr("class", "annotation-test")
+        .call(makeAnnotations);
+
+      svg.selectAll("g.annotation-connector, g.annotation-note")
+        .classed("hidden", true);
+    })
       </script>
 
       <p>
