@@ -155,10 +155,10 @@
 
     <section class="slide">
       <script src="//d3js.org/d3.v4.js"></script>
-      <svg id="bubble" width=500 height=500></svg>
+      <svg id="bubble" width=1000 height=500></svg>
       <h2>Which state was targeted the most?</h2>
       <script>
-        var width = 500,
+        var width = 1000,
           height = 500;
 
         var svg = d3.select("body")
@@ -202,7 +202,7 @@
             .attr("fill", "black")
             .attr("font-size", "12px")
             .text(function(d) {
-              return d.Provstate + '' + d.Attacktype1;
+              return d.Provstate + ' ' + d.Attacktype1;
             })
 
           simulation.nodes(data)
