@@ -260,7 +260,7 @@
         window.makeAnnotations = d3.annotation()
         .annotations(labels)
         .type(d3.annotationCalloutCircle)
-        .accessors({ x: d => x(d.attacktype1_txt)),
+        .accessors({ x: d => x(d.attacktype1_txt)}),
           y: d => y(d.attacktype1)
         })
         .accessorsInverse({
