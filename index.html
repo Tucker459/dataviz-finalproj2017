@@ -163,7 +163,7 @@
               tooltip.transition().duration(200)
                 .style("opacity", 0.9);
               tooltip.select("div").html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
-                .style("position", "static")
+                .style("position", "fixed")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 10) + "px");
             });
