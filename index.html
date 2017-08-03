@@ -77,21 +77,21 @@
     <section class="slide">
       <h2>US Terrorism Attacks Types</h2>
       <script src="//d3js.org/d3.v4.js"></script>
-      <svg id="bar" width="960" height="605"></svg>
+      <svg id="bar" width="800" height="500"></svg>
       <script>
         // Setting the margins
         var svg = d3.select("svg#bar"),
           margin = {
             top: 20,
             right: 20,
-            bottom: 30,
-            left: 40
+            bottom: 100,
+            left: 60
           },
           width = +svg.attr("width") - margin.left - margin.right,
           height = +svg.attr("height") - margin.top - margin.bottom;
 
         // Creating Linear and Band Scales
-        var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+        var x = d3.scaleBand().rangeRound([15, width]).padding(0.5),
           y = d3.scaleLinear().rangeRound([height, 0]);
 
         var vx = svg.append("g")
