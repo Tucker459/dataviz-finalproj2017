@@ -124,7 +124,7 @@
           // Creation of the Y Axis
           vx.append("g")
             .attr("class", "y axis")
-            .call(d3.axisLeft(y).ticks(10, ""))
+            .call(d3.axisLeft(y).ticks(10, ".1s"))
             .append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", 6)
