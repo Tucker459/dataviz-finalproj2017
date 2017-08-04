@@ -76,8 +76,8 @@
 
     <section class="slide">
       <h2>US Terrorism Attacks Types</h2>
-      <svg id="bar" width="800" height="500"></svg>
-      <script src="//d3js.org/d3.v4.js"></script>
+      <svg id="bar" width="960" height="500"></svg>
+      <script src="//d3js.org/d3.v4.min.js"></script>
       <script>
       var svg = d3.select("svg#bar"),
         margin = {
@@ -106,7 +106,7 @@
         x.domain(data.map(function(d) {
           return d.attacktype1_txt;
         }));
-        y.domain([0, d3.max(data, function(d) {
+        y.domain([0, d3.sum(data, function(d) {
           return d.attacktype1;
         })]);
 
