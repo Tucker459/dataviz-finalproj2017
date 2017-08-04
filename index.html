@@ -76,122 +76,80 @@
 
     <section class="slide">
       <h2>US Terrorism Attacks Types</h2>
-      <script src="//d3js.org/d3.v4.js"></script>
       <svg id="bar" width="800" height="500"></svg>
+      <script src="//d3js.org/d3.v4.js"></script>
       <script>
-        // Setting the margins
-        var svg = d3.select("svg#bar"),
-          margin = {
-            top: 20,
-            right: 20,
-            bottom: 100,
-            left: 60
-          },
-          width = +svg.attr("width") + margin.left + margin.right,
-          height = +svg.attr("height") + margin.top + margin.bottom;
+      var svg = d3.select("svg#bar"),
+        margin = {
+          top: 20,
+          right: 20,
+          bottom: 30,
+          left: 40
+        },
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom;
 
-        // Creating Linear and Band Scales
-        var x = d3.scaleBand().rangeRound([15, width]).padding(0.5),
-          y = d3.scaleLinear().rangeRound([height, 0]);
+      // Creating Linear and Band Scales
+      var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+        y = d3.scaleLinear().rangeRound([height, 0]);
 
-        var vx = svg.append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      var vx = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        // Grabbing Data
-        d3.csv("globalterrorismdb_US0617dist.csv", function(d) {
-          d.attacktype1 = +d.attacktype1;
-          return d;
-        }, function(error, data) {
-          if (error) throw error;
+      // Grabbing Data
+      d3.csv("globalterrorismdb_US0617dist.csv", function(d) {
+        d.attacktype1 = +d.attacktype1;
+        return d;
+      }, function(error, data) {
+        if (error) throw error;
 
-          x.domain(data.map(function(d) {
-            return d.attacktype1_txt;
-          }));
-          y.domain([0, d3.max(data, function(d) {
-            return d.attacktype1;
-          })]);
-          
-          var xAxis = d3.axisBottom().scale(x).ticks(9);
-          
-          var yAxis = d3.axisLeft().scale(y).ticks(9).tickSizeOuter(0).tickPadding(10);
+        x.domain(data.map(function(d) {
+          return d.attacktype1_txt;
+        }));
+        y.domain([0, d3.max(data, function(d) {
+          return d.attacktype1;
+        })]);
 
-        
-            // Creation of the X Axis
-          vx.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis)
-            .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "0.5em")
-            .attr("dy", "-.55em")
-            .attr("y", 20)
-            .attr("transform", "rotate(-45)");
+        // Creation of the X Axis
+        vx.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .attr("transform", "rotate(-45)")
+          .call(d3.axisBottom(x));
 
 
 
-          // Creation of the Y Axis
-          vx.append("g")
-            .attr("class", "y axis")
-            .call(yAxis)
-            .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 5)
-            .attr("dy", "0.8em")
-            .attr("text-anchor", "left")
-            .text("Count");
+        // Creation of the Y Axis
+        vx.append("g")
+          .attr("class", "y axis")
+          .call(d3.axisLeft(y).ticks(10, ".1s"))
+          .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", "0.71em")
+          .attr("text-anchor", "left")
+          .text("Count");
 
-          // Creation of the width and height of the bars
-          vx.selectAll(".bar")
-            .data(data)
-            .enter().append("rect")
-            .attr("class", "bar")
-            .attr("x", function(d) {
-              return x(d.attacktype1_txt);
-            })
-            .attr("y", function(d) {
-              return y(d.attacktype1);
-            })
-            .attr("width", x.bandwidth())
-            .attr("height", function(d) {
-              return height - y(d.attacktype1);
-            })
-            .on("mouseover", function() {
-              tooltip.style("display", null);
-            })
-            .on("mouseout", function() {
-              tooltip.style("display", "none");
-            })
-            .on("mousemove", function(d) {
-              tooltip.transition().duration(200)
-                .style("opacity", 0.9);
-              tooltip.select("div").html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
-                .style("position", "fixed")
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 80) + "px");
-            });
-
-          var tooltip = d3.select("body").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0.5);
-
-          tooltip.append("rect")
-            .attr("width", 30)
-            .attr("height", 20)
-            .attr("fill", "#ffffff")
-            .style("opacity", 0.5);
-
-          tooltip.append("div")
-            .attr("x", 15)
-            .attr("dy", "1.2em")
-            .style("text-anchor", "middle")
-            .attr("font-size", "1.5em")
-            .attr("font-weight", "bold");
-        });
+        // Creation of the width and height of the bars
+        vx.selectAll(".bar")
+          .data(data)
+          .enter().append("rect")
+          .attr("class", "bar")
+          .attr("x", function(d) {
+            return x(d.attacktype1_txt);
+          })
+          .attr("y", function(d) {
+            return y(d.attacktype1);
+          })
+          .attr("width", x.bandwidth())
+          .attr("height", function(d) {
+            return height - y(d.attacktype1);
+          })
+      });
       </script>
 
-      
-      
+
+
       <p>
         This is a bar chart describing the amount of different attack types that happen in the United States. I was able to accomplish this by utilizing Mike Bostock's <a href="https://bl.ocks.org/mbostock/3885304">Bar Chart</a> example to follow.
       </p>
