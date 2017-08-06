@@ -17,7 +17,7 @@
   shape-rendering: crispEdges;
 }
 
-#tooltip {
+.tooltip {
   opacity: 1;
   position: absolute;
   text-align: center;
