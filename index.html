@@ -141,7 +141,7 @@
 
             var tooltip = d3.select("#tooltip");
 
-          selectAll(".bar").data(d).enter().append("rect")
+          g.selectAll(".bar").data(d).enter().append("rect")
             .on("mouseover", function(d) {
               tooltip.style("opacity", 1)
                 .html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
