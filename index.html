@@ -78,7 +78,7 @@
       <h2>US Terrorism Attacks Types</h2>
       <svg id="bar" width="960" height="500"></svg>
       <script src="//d3js.org/d3.v4.js"></script>
-      <div id="tooltip" opacity=0></div>
+      <div id="tooltip"></div>
       <script>
         var svg = d3.select("svg#bar"),
           margin = {
@@ -139,27 +139,12 @@
               return height - y(d.attacktype1);
             });
 
-            var tooltip = d3.select("body").append("div")
-              .attr("class", "tooltip")
-              .style("opacity", 0.5);
+            var tooltip = d3.select("#tooltip");
 
-            tooltip.append("rect")
-              .attr("width", 30)
-              .attr("height", 20)
-              .attr("fill", "#ffffff")
-              .style("opacity", 0.5);
-
-            tooltip.append("div")
-              .attr("x", 15)
-              .attr("dy", "1.2em")
-              .style("text-anchor", "middle")
-              .attr("font-size", "1.5em")
-              .attr("font-weight", "bold");
-
-          selectAll("rect").data(d).enter().append("rect")
+          selectAll("").data(d).enter().append("rect")
             .on("mouseover", function(d) {
-              tooltip.style("opacity", 1);
-              tooltip.select("div").html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
+              tooltip.style("opacity", 1)
+                .html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 80) + "px");
             })
