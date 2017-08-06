@@ -18,7 +18,7 @@
 }
 
 #tooltip {
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   text-align: center;
   width: 60px; height: 40px;
