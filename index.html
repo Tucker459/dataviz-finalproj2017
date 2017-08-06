@@ -124,6 +124,8 @@
             .attr("text-anchor", "end")
             .text("Count");
 
+         var tooltip = d3.select("#tooltip");
+
           g.selectAll(".bar")
             .data(data)
             .enter().append("rect")
@@ -137,11 +139,7 @@
             .attr("width", x.bandwidth())
             .attr("height", function(d) {
               return height - y(d.attacktype1);
-            });
-
-            var tooltip = d3.select("#tooltip");
-
-          g.selectAll("rect").data(data).enter().append("rect")
+            })
             .on("mouseover", function(d) {
               tooltip.style("opacity", 1)
                 .html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
