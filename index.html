@@ -127,8 +127,7 @@
          var tooltip = d3.select("body").append("div")
             .style("position", "absolute")
             .style("z-index", "10")
-            .style("visibility", "hidden")
-            .text("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>");
+            .style("visibility", "hidden");
 
           g.selectAll(".bar")
             .data(data)
@@ -145,15 +144,15 @@
               return height - y(d.attacktype1);
             })
             .on("mouseover", function() {
-              tooltip.style("visibility", "visible")
-                .style("left", (d3.event.pageX - 10) + "px")
-                .style("top", (d3.event.pageY - 10) + "px");
+              tooltip.style("visibility", "visible");
             })
-            .on("mousemove", function() {
-              tooltip.style("visibility", "hidden");
+            .on("mousemove", function(d) {
+              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
+              .style("left", (d3.event.pageX - 10) + "px")
+              .style("top", (d3.event.pageY - 10) + "px");
             })
             .on("mouseout", function() {
-              tooltip.style("display", "none");
+              tooltip.style("visibility", "hidden");
             });
         });
       </script>
