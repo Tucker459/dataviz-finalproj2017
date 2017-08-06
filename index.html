@@ -143,11 +143,11 @@
               return height - y(d.attacktype1);
             })
             .on("mouseover", function() {
-              tooltip.style("visibility", "visible");
+              tooltip.style("visibility", "hidden");
             })
             .on("mousemove", function(d) {
-              tooltip.transition().duration(200);
-              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
+              tooltip.style("visibilty", "visible")
+              .html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
               .style("left", (d3.event.pageX - 10) + "px")
               .style("top", (d3.event.pageY - 10) + "px");
             })
