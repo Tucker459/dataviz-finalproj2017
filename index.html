@@ -107,19 +107,18 @@
             })
             .rollup(function(v) {
               return {
-                d3.sum(v, function(d) {
+                total: d3.sum(v, function(d) {
                   return d.attacktype1;
                 })
               };
             })
             .entries(data);
-            console.log(JSON.stringify(attacktype));
 
           x.domain(data.map(function(d) {
             return d.attacktype1_txt;
           }));
           y.domain([0, d3.max(attacktype, function(d) {
-            return d.attacktype1;
+            return d.values;
           })]);
 
           g.append("g")
@@ -143,7 +142,7 @@
             .style("visibility", "hidden");
 
           g.selectAll(".bar")
-            .data(attacktype)
+            .data(data)
             .enter().append("rect")
             .attr("class", "bar")
             .attr("x", function(d) {
