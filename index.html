@@ -101,11 +101,24 @@
         }, function(error, data) {
           if (error) throw error;
 
+          var attacktype = d3.nest()
+            .key(function(d) {
+              return d.attacktype1_txt;
+            })
+            .rollup(function(v) {
+              return {
+                total: d3.sum(v, function(d) {
+                  return d.attacktype1;
+                })
+              };
+            })
+            .entries(data);
+
           x.domain(data.map(function(d) {
             return d.attacktype1_txt;
           }));
-          y.domain([0, d3.max(data, function(d) {
-            return d.attacktype1;
+          y.domain([0, d3.max(attacktype, function(d) {
+            return d.values;
           })]);
 
           g.append("g")
@@ -123,7 +136,7 @@
             .attr("text-anchor", "end")
             .text("Count");
 
-         var tooltip = d3.select("body").append("div")
+          var tooltip = d3.select("body").append("div")
             .style("position", "absolute")
             .style("z-index", "10")
             .style("visibility", "hidden");
@@ -136,19 +149,19 @@
               return x(d.attacktype1_txt);
             })
             .attr("y", function(d) {
-              return y(d.attacktype1);
+              return y(attacktype.values);
             })
             .attr("width", x.bandwidth())
             .attr("height", function(d) {
-              return height - y(d.attacktype1);
+              return height - y(attacktype.values);
             })
             .on("mouseover", function() {
               tooltip.style("visibility", "visible");
             })
             .on("mousemove", function(d) {
-              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
-              .style("left", (d3.event.pageX - 10) + "px")
-              .style("top", (d3.event.pageY - 10) + "px");
+              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + attacktype.values + "</strong>")
+                .style("left", (d3.event.pageX - 10) + "px")
+                .style("top", (d3.event.pageY - 10) + "px");
             })
             .on("mouseout", function() {
               tooltip.style("visibility", "hidden");
