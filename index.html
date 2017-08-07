@@ -113,13 +113,13 @@
               };
             })
             .entries(data);
-            console.log(JSON.stringify(attacktype));
+            console.log(JSON.stringify(attacktype.value));
 
           x.domain(data.map(function(d) {
             return d.attacktype1_txt;
           }));
-          y.domain([0, d3.max(attacktype, function(d) {
-            return d.values;
+          y.domain([0, d3.max(data, function(d) {
+            return d.attacktype1;
           })]);
 
           g.append("g")
