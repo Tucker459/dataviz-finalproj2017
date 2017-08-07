@@ -113,6 +113,7 @@
               };
             })
             .entries(data);
+            console.log(JSON.stringify(attacktype));
 
           x.domain(data.map(function(d) {
             return d.attacktype1_txt;
@@ -149,17 +150,17 @@
               return x(d.attacktype1_txt);
             })
             .attr("y", function(d) {
-              return y(d.values);
+              return y(d.attacktype1);
             })
             .attr("width", x.bandwidth())
             .attr("height", function(d) {
-              return height - y(d.values);
+              return height - y(d.attacktype1);
             })
             .on("mouseover", function() {
               tooltip.style("visibility", "visible");
             })
             .on("mousemove", function(d) {
-              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.values + "</strong>")
+              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
                 .style("left", (d3.event.pageX - 10) + "px")
                 .style("top", (d3.event.pageY - 10) + "px");
             })
