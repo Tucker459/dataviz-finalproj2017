@@ -113,13 +113,13 @@
               };
             })
             .entries(data);
-            console.log(JSON.stringify(attacktype));
+            console.log(JSON.stringify(attacktype.values.total));
 
           x.domain(data.map(function(d) {
             return d.attacktype1_txt;
           }));
-          y.domain([0, d3.max(data, function(d) {
-            return d.attacktype1;
+          y.domain([0, d3.max(attacktype, function(d) {
+            return d.value[0].total;
           })]);
 
           g.append("g")
@@ -143,24 +143,24 @@
             .style("visibility", "hidden");
 
           g.selectAll(".bar")
-            .data(data)
+            .data(attacktype)
             .enter().append("rect")
             .attr("class", "bar")
             .attr("x", function(d) {
-              return x(d.attacktype1_txt);
+              return x(d.key);
             })
             .attr("y", function(d) {
-              return y(d.attacktype1);
+              return y(d.value[0].total);
             })
             .attr("width", x.bandwidth())
             .attr("height", function(d) {
-              return height - y(d.attacktype1);
+              return height - y(d.value[0].total);
             })
             .on("mouseover", function() {
               tooltip.style("visibility", "visible");
             })
             .on("mousemove", function(d) {
-              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
+              tooltip.html("Name: <strong>" + d.key + "</strong><br/>Count: <strong>" + d.value[0].total + "</strong>")
                 .style("left", (d3.event.pageX - 10) + "px")
                 .style("top", (d3.event.pageY - 10) + "px");
             })
