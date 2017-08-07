@@ -149,17 +149,17 @@
               return x(d.attacktype1_txt);
             })
             .attr("y", function(d) {
-              return y(attacktype.values);
+              return y(d.values);
             })
             .attr("width", x.bandwidth())
             .attr("height", function(d) {
-              return height - y(attacktype.values);
+              return height - y(d.values);
             })
             .on("mouseover", function() {
               tooltip.style("visibility", "visible");
             })
             .on("mousemove", function(d) {
-              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + attacktype.values + "</strong>")
+              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.values + "</strong>")
                 .style("left", (d3.event.pageX - 10) + "px")
                 .style("top", (d3.event.pageY - 10) + "px");
             })
