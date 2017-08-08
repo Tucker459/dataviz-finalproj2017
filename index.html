@@ -119,8 +119,8 @@
             })
             console.log(grp_attacktype);
 
-          x.domain(data.map(function(d) {
-            return d.attacktype1_txt;
+          x.domain(attacktype.map(function(d) {
+            return x.key;
           }));
           y.domain([0, d3.max(grp_attacktype)]);
 
@@ -152,17 +152,17 @@
               return x(d.attacktype1_txt);
             })
             .attr("y", function(d) {
-              return y(grp_attacktype);
+              return y(d.attacktype1);
             })
             .attr("width", x.bandwidth())
             .attr("height", function(d) {
-              return height - y(grp_attacktype);
+              return height - y(d.attacktype1);
             })
             .on("mouseover", function() {
               tooltip.style("visibility", "visible");
             })
             .on("mousemove", function(d) {
-              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + grp_attacktype + "</strong>")
+              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
                 .style("left", (d3.event.pageX - 10) + "px")
                 .style("top", (d3.event.pageY - 10) + "px");
             })
