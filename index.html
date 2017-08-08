@@ -119,12 +119,10 @@
             })
             console.log(grp_attacktype);
 
-          x.domain(data.map(function(d) {
-            return d.attacktype1_txt;
+          x.domain(attacktype.map(function(d) {
+            return d.key;
           }));
-          y.domain([0, d3.max(data, function(d){
-            return d.attacktype1;
-          })]);
+          y.domain([0, d3.max(grp_attacktype)]);
 
           g.append("g")
             .attr("class", "x axis-x")
@@ -147,24 +145,24 @@
             .style("visibility", "hidden");
 
           g.selectAll(".bar")
-            .data(data)
+            .data(attacktype)
             .enter().append("rect")
             .attr("class", "bar")
             .attr("x", function(d) {
-              return x(d.attacktype1_txt);
+              return x(d.key);
             })
             .attr("y", function(d) {
-              return y(d.attacktype1);
+              return y(d.value.total);
             })
             .attr("width", x.bandwidth())
             .attr("height", function(d) {
-              return height - y(d.attacktype1);
+              return height - y(d.value.total);
             })
             .on("mouseover", function() {
               tooltip.style("visibility", "visible");
             })
             .on("mousemove", function(d) {
-              tooltip.html("Name: <strong>" + d.attacktype1_txt + "</strong><br/>Count: <strong>" + d.attacktype1 + "</strong>")
+              tooltip.html("Name: <strong>" + d.key + "</strong><br/>Count: <strong>" + d.value.total + "</strong>")
                 .style("left", (d3.event.pageX - 10) + "px")
                 .style("top", (d3.event.pageY - 10) + "px");
             })
