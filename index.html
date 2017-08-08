@@ -117,14 +117,12 @@
             var grp_attacktype = attacktype.map(function(x) {
               return x.value.total;
             })
-            console.log(d.attacktype1);
+            console.log(grp_attacktype);
 
           x.domain(data.map(function(d) {
             return d.attacktype1_txt;
           }));
-          y.domain([0, d3.max(data, function(d) {
-            return d.attacktype1;
-          })]);
+          y.domain([0, d3.max(grp_attacktype)]);
 
           g.append("g")
             .attr("class", "x axis-x")
